@@ -1,5 +1,5 @@
 # The-game-of-life
-The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970
+[The Game of Life](https://www.youtube.com/watch?v=CgOcEZinQ2I) also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970
 
 ##Rules
 
@@ -14,5 +14,21 @@ All births and deaths occur simultaneously. Applying all rules to an entire boar
 The ideal game board is infinite. For this program, we wrap around at the boundaries of the board, the left edge to the right edge and the top edge to the bottom edge, we play on a torus. 
 
 Currently, the game board is set to to a fixed size of 30 x 50 cells. This value is adjustable.
+
+Code design: 
+* as always I took a piece of paper, and draw how IT should look. 
+* Then wrote down what app should do, like "outputs cells 30x50", "a cell is clickable", "compute next generation" etc. 
+* Next broke down the app in components and functions. And made connections between.
+* Last step was make out a sequence of actions:
+1. Make 2-dimensional array
+2. Output the array on the screen
+3. Make cells clickable
+4. Randomize the grid
+5. Clear the grid (button)
+6. Calculate the next generation (count neighbors and make torus)
+7. Figure out a life cycle for computation of next generation 
+8. Play/Pause
+***
+That's it. All that's left to do is build a static version in React and implement all step above to provide logic
 
 
