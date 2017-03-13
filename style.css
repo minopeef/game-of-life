@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|VT323');
+
+$snow: #f4f4f4;
+$border: #ebebeb;
+$lGray: #d0d0d0;
+$cellGray: #666666;
+$borderGray: #e4e4e4;
+$just: #d2d2d2;
+
+body {
+  margin: 0; 
+  padding: 0;
+}
+
+.header {
+  margin: -20px 0 0;  
+  height: 100px;
+  width: 100%;
+  min-width: 1200px;
+  background-color: $snow;
+  font: 1.5em 'VT323', cursive;  
+  border-bottom: 2px solid $border;
+  h1{
+    display: block;
+    float:left;
+    width: 35%;
+    padding-left: 1vw;
+  }
+  .right{
+    float:right;
+    width: 60%;
+  }
+  a {
+    color: inherit;
+  }
+}
+
+.board {
+  width: 957px;
+  height: 620px;
+  margin: 30px auto 10px;
+  button {    
+    width: 70px;
+    height: 30px;
+    border: 0;
+    margin-right: 5px;
+    color: $cellGray;
+    background-color: $border; 
+    font: 1.1em 'Lato', cursive;
+    &:hover {
+      background: #DDD;
+    } 
+    &:focus {
+      outline:0;
+    }
+    &:active {
+      border: 0 solid #000;
+      background: $cellGray;
+      color: $just;
+      transform: scale(1.1);   
+    }
+    &:disabled {
+      background: $cellGray;
+      color: $just;
+    }
+  }
+  .random {
+    margin-left: 38%;
+  }
+  span {
+    float: right;
+    font: 1.1em 'Lato', cursive; 
+    color: $cellGray;
+    padding: 5px;
+    background-color: $border; 
+  }
+  .grid {
+    border: 2px solid $border;
+    padding: 0; 
+    width: 953px;
+    height: 572px;
+    td {
+      width: 15px;
+      height: 15px;
+       &:hover:not(.alive) {
+        background: #DDD;
+      } 
+    }
+    .alive {
+       background-color: $cellGray; 
+    }
+    .dead {
+      background-color: $snow;  
+    }
+  }
+}
+
+.footer {
+  width: 100%;
+  height: 5vh;
+  background-color: $snow; 
+  background: linear-gradient($snow, #fff);
+  border-top: 2px solid $border;
+}
