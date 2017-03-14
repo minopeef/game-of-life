@@ -11,7 +11,7 @@ class Game extends React.Component {
   }
   
   componentDidMount() {
-   this.interval = setInterval(() => this.nextGeneration(), 500); //invokes to compute next level
+   this.interval = setInterval(() => this.nextGeneration(), 400); //invokes to compute next level
   }
   
   componentWillUnmount() {
@@ -20,13 +20,13 @@ class Game extends React.Component {
   
   random() {
     clearInterval(this.interval); //prevent MULTIPLE INTERVAL 
-    this.setState({cells: generateGrid(30, 50, true), count: 0});
-    this.interval = setInterval(() => this.nextGeneration(), 500); 
+    this.setState({cells: generateGrid(30, 50, true), count: 0, isRunning: true});
+    this.interval = setInterval(() => this.nextGeneration(), 400); 
   } 
   
   play() {
     clearInterval(this.interval); //prevent MULTIPLE INTERVAL
-    this.interval = setInterval(() => this.nextGeneration(), 500); 
+    this.interval = setInterval(() => this.nextGeneration(), 400); 
     this.setState({isRunning: true}); //for buttons
   } 
   
@@ -46,12 +46,15 @@ class Game extends React.Component {
     this.setState({cells: newCells}); 
   }
   
-  nextGeneration() {   
+  nextGeneration() {
+    if(isEmptyGrid(this.state.cells)) {
+      return; //if all cells are 0, stop
+    }
     let neighbors = countNeighbors(this.state.cells); 
     let oldGrid = this.state.cells;
     let newGrid = generateGrid(30, 50);
-    for(let i=0; i < oldGrid.length; i++) {
-      for(let j=0; j < oldGrid[0].length; j++) {
+    for(let i=0, rows = oldGrid.length; i < rows; i++) {
+      for(let j=0, columns = oldGrid[0].length; j < columns; j++) {
           if (oldGrid[i][j] == 1 && neighbors[i][j] == 2 || neighbors[i][j] == 3) { //if alive and neighb 2 or 3, stays alive
               newGrid[i][j] = 1;
          } else if (oldGrid[i][j] == 0 && neighbors[i][j] == 3) {//if dead and has 3 neighb new cell will be born
@@ -124,6 +127,16 @@ const generateGrid = (rows, columns, random=false) => {
   return cells;
 }
 
+const isEmptyGrid = (grid) => {
+  let empty = true; //assume by default as empty
+  grid.map(row => {
+       row.map(cell => { //if found alive return true
+         if(cell == 1) empty = false;
+    });
+  });
+  return empty;
+}
+
 const countNeighbors = (grid) => { //2d array, each cell contain a number of neighbors
   let count = generateGrid(30, 50);
      grid.map((row, rowIndex, grid) => {
@@ -159,3 +172,4 @@ const torus = (index, length) => { // handle connecting edges together
 }
 
 ReactDOM.render(<Game/>, document.getElementById('game'));
+
